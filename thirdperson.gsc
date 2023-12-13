@@ -35,6 +35,9 @@ thirdp()
 {
   keypress = ""; //from miscmod
   timerr = 0;
+
+  bombzone_A = getent("bombzone_A", "targetname");
+  bombzone_B = getent("bombzone_B", "targetname");
   
   for(;;)
   {
