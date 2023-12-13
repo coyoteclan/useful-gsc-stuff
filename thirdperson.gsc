@@ -54,8 +54,10 @@ thirdp()
       
       switch(keypress){
         case "rr":
-          if (self.thirdperson = 1)
+          if (self.thirdperson){
             setclientcvar("cg_thirdperson", "0");
+            self.thirdperson = 0;
+          }
           else{
             setclientcvar("cg_thirdperson", "1");
             self.thirdperson = 1;
