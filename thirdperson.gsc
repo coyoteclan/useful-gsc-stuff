@@ -3,7 +3,7 @@ main(phase, register)
   switch(phase)
   {
     case "init": _init(register); break;
-    case "load" _load(); break;
+    case "load": _load(); break;
   }
 }
 
