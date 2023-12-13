@@ -24,7 +24,7 @@ _load()
 
 spawnPlayer(a0,a1, a2, a3, a4, a5, a6, a7, a8, a9, b0, b1, b2, b3, b4, b5, b6, b7, b8, b9)
 {
-  setclientcvar("cg_thirdperson", "0");
+  self setClientCvar("cg_thirdperson", "0");
   self thirdperson = false;
   wait 1;
   self iPrintln(&"Double Press ^2Reload ^7 to change perspective.")
@@ -33,7 +33,7 @@ spawnPlayer(a0,a1, a2, a3, a4, a5, a6, a7, a8, a9, b0, b1, b2, b3, b4, b5, b6, b
 
 thirdp()
 {
-  keypress = "";
+  keypress = ""; //from miscmod
   timerr = 0;
   
   for(;;)
