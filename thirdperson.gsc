@@ -43,8 +43,8 @@ thirdp()
     if (self.sessionstate != "playing" || (isdefined(bombzone_A) && isdefined(bombzone_A.planting)) || (isdefined(bombzone_B) && isdefined(bombzone_B.planting)))
       continue;
     
-    if (self useReloadPressed()){
-      while(self useButtonPressed())
+    if (self reloadButtonPressed()){
+      while(self reloadButtonPressed())
         wait 0.05;
       keypress += "r";
     }
