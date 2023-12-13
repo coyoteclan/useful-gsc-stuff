@@ -56,8 +56,10 @@ thirdp()
         case "rr":
           if (self.thirdperson = 1)
             setclientcvar("cg_thirdperson", "0");
-          else
-            setclientcvar("cg_thirdperson", "1"); self.thirdperson = 1;
+          else{
+            setclientcvar("cg_thirdperson", "1");
+            self.thirdperson = 1;
+          }
         break;
       }
       if(timerr > 0 || resett){
