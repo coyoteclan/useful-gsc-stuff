@@ -41,6 +41,7 @@ thirdp()
   
   for(;;)
   {
+    wait 0.05;
     if (isdefined(self.pers["dumbbot"]))
       return;
     if (self.sessionstate != "playing" || (isdefined(bombzone_A) && isdefined(bombzone_A.planting)) || (isdefined(bombzone_B) && isdefined(bombzone_B.planting)))
@@ -72,5 +73,6 @@ thirdp()
         keypress = "";
       }
     }
+    wait 0.05;
   }
 }
