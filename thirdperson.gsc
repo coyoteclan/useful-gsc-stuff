@@ -13,7 +13,7 @@ _init(register)
     return;
   level.thirdpmod = true;
   
-  [[register]]("PlayerConnect", ::thirdp, "thread");
+  [[register]]("spawnPlayer", ::thirdp, "thread");
 }
 _load()
 {
@@ -33,6 +33,7 @@ PlayerConnect(a0,a1, a2, a3, a4, a5, a6, a7, a8, a9, b0, b1, b2, b3, b4, b5, b6,
 
 thirdp()
 {
+  self endon("disconnect");
   self setClientCvar("cg_thirdperson", "0");
   self.thirdperson = false;
   wait 1;
@@ -45,7 +46,7 @@ thirdp()
   
   for(;;)
   {
-    self endon("disconnect");
+    //self endon("disconnect");
     wait 0.05;
     if (isdefined(self.pers["dumbbot"]))
       return;
