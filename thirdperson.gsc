@@ -13,7 +13,7 @@ _init(register)
     return;
   level.thirdpmod = true;
   
-  [[register]]("spawnPlayer", ::thirdp, "thread");
+  [[register]]("PlayerConnect", ::thirdp, "thread");
 }
 _load()
 {
@@ -41,6 +41,7 @@ thirdp()
   
   for(;;)
   {
+    self endon("disconnect")
     wait 0.05;
     if (isdefined(self.pers["dumbbot"]))
       return;
