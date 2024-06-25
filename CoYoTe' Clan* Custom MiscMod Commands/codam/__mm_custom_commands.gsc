@@ -180,11 +180,11 @@ cmd_dfps(args)
 
     switch(args[1]) {
         case "on":
-            message("^5INFO: ^7FPS Enabled.");
+            message_player("^5INFO: ^7FPS Enabled.");
             self setClientCvar("cg_drawfps", "1");
         break;
         case "off":
-            message("^5INFO: ^7FPS Disabled.");
+            message_player("^5INFO: ^7FPS Disabled.");
             self setClientCvar("cg_drawfps", "0");
         break;
         default:
