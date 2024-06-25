@@ -60,7 +60,8 @@ cmd_gg(args)
     }
     message(codam\_mm_mmm::namefix(self.name) + " ^7says ^2G^3o^5o^1D ^2G^44^6M^0e ^7!");
     self.cooldown = 5;
-	for(n=0; n<self.cooldown; n++) {
+    i = self.cooldown;
+	for(n=0; n<i; n++) {
 		self.cooldown--;
 		wait 1;
 	}
@@ -81,7 +82,8 @@ cmd_n1(args)
     messages[4] = " ^7says GooD Shooting^1!";
     message(codam\_mm_mmm::namefix(self.name) + messages[randomInt(4)]);
     self.cooldown = 5;
-	for(n=0; n<self.cooldown; n++) {
+    i = self.cooldown;
+	for(n=0; n<i; n++) {
 		self.cooldown--;
 		wait 1;
 	}
@@ -219,7 +221,8 @@ cmd_disco(args)
     }
     SetExpFog(0.0002, 0.8, 0.8, 0.8, 0);
     self.cooldown = 20;
-	for(n=0; n<self.cooldown; n++) {
+    i = self.cooldown;
+	for(n=0; n<i; n++) {
 		self.cooldown--;
 		wait 1;
 	}
@@ -246,7 +249,8 @@ cmd_dash(args)
 		self setVelocity(newVelocity);
 	}
     self.cooldown = 10;
-	for(n=0; n<self.cooldown; n++) {
+    i = self.cooldown;
+	for(n=0; n<i; n++) {
 		self.cooldown--;
 		wait 1;
 	}
