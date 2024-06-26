@@ -8,4 +8,4 @@ All you need to do is replace `ranksys.gsc` in **codam** folder with the one fro
 custom commands script from this repo.
 
 ### Note
-  This is just a small modification. All the rights goto the original author, [TheWikiFesh](https://discordapp.com/users/926328257819848796).
+  This is just a small modification. All the rights goto the original author on vcodmods.
