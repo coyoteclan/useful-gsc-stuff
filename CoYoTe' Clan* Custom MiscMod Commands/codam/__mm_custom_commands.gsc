@@ -26,6 +26,12 @@ _load()
     level.modmmccbycato2 = true;
 
     // Example: custom commands
+	/*commands(130, level.prefix + "register"  , ::r_register    , "Create a rank account. ["+ level.prefix + "register <name> <password>]");
+	commands(131, level.prefix + "signin"  , ::r_login    , "Sign into your rank account. ["+ level.prefix + "signin <name> <password>]");
+	commands(132, level.prefix + "signout"  , ::r_logout    , "Logout from your rank account. ["+ level.prefix + "signout]");
+    commands(133, level.prefix + "top"  , ::r_top    , "Show the top 10 players. ["+ level.prefix + "top]");
+	commands(134, level.prefix + "playerstat"  , ::r_stat    , "Shows stats of a player. ["+ level.prefix + "playerstat <name>]");
+	commands(135, level.prefix + "dumpdbs"  , ::r_dumpdbs    , "Dump databases. ["+ level.prefix + "dumpdbs]");*/
 
 	commands(150, level.prefix + "gg"  , ::cmd_gg    , "Say GG to everyone ["+ level.prefix + "gg]");
     commands(151, level.prefix + "n1"  , ::cmd_n1    , "Nice ["+ level.prefix + "n1]");
@@ -33,8 +39,9 @@ _load()
     commands(153, level.prefix + "fps"         , ::cmd_fps         , "Change FPS limit. [" + level.prefix + "fps <value>]");
     commands(154, level.prefix + "dfps"         , ::cmd_dfps         , "show fps. [" + level.prefix + "dfps on/off]");
     commands(155, level.prefix + "disco"         , ::cmd_disco         , "Disco. [" + level.prefix + "disco]");
-    commands(156, level.prefix + "dash"         , ::cmd_dash         , "Dash where you're looking. Need forward button pressed. [" + level.prefix + "dash]");
-    commands(157, level.prefix + "stuka"         , ::cmd_stuka         , "Stuka. [" + level.prefix + "stuka <num || name> ]");
+    commands(156, level.prefix + "jump"         , ::cmd_jump         , "Double Jump. [" + level.prefix + "jump]");
+    commands(157, level.prefix + "dash"         , ::cmd_dash         , "Dash where you're looking. Need forward button pressed. [" + level.prefix + "dash]");
+    commands(158, level.prefix + "stuka"         , ::cmd_stuka         , "Stuka. [" + level.prefix + "stuka <num || name> ]");
 }
 
 commands(id, cmd, func, desc)
@@ -52,6 +59,40 @@ message_player(msg)
     codam\_mm_commands::message_player(msg);
 }
 
+message(msg)
+{
+    codam\_mm_commands::message(msg);
+}
+/*
+r_register(args)
+{
+	self codam\ranksys::cmd_ranked_register(args);
+}
+
+r_login(args)
+{
+	self codam\ranksys::cmd_ranked_login(args);
+}
+
+r_logout(args)
+{
+	self codam\ranksys::cmd_ranked_logout(args);
+}
+
+r_stat(args)
+{
+	self codam\ranksys::cmd_ranked_stat(args);
+}
+
+r_top(args)
+{
+	self codam\ranksys::cmd_ranked_top(args);
+}
+
+r_dumpdbs(args)
+{
+	self codam\ranksys::cmd_dumpdbs(args);
+}*/
 cmd_gg(args)
 {
     if(isDefined(self.cooldown)) {
@@ -229,9 +270,43 @@ cmd_disco(args)
 	self.cooldown = undefined;
 }
 
+cmd_jump(args)
+{
+    self endon("disconnect");
+    level endon("intermission");
+    level endon("end_map");
+    if(self.sessionstate != "playing")
+        return;
+    if(isDefined(self.cooldown)) {
+        message_player("Cooldown, wait " + self.cooldown + " seconds.");
+        return;
+    }
+    velocity = self getVelocity();
+
+    newVelocity_z = velocity[2] + 140;
+    newVelocity = (velocity[0], velocity[1], newVelocity_z);
+
+    self setVelocity(newVelocity);
+    self.cooldown = 6;
+    i = self.cooldown;
+	for(n=0; n<i; n++) {
+		self.cooldown--;
+		wait 1;
+	}
+	self.cooldown = undefined;
+}
+
 //Using Battleroyale physics
 cmd_dash(args)
 {
+    /*self endon("death");
+    self endon("spawned");
+    self endon("spawned_spectator");*/
+    self endon("disconnect");
+    level endon("intermission");
+    level endon("end_map");
+    if(self.sessionstate != "playing")
+        return;
     if(isDefined(self.cooldown)) {
         message_player("Cooldown, wait " + self.cooldown + " seconds.");
         return;
