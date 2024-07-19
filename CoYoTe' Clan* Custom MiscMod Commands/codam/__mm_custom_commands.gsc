@@ -201,37 +201,59 @@ cmd_disco(args) {
 cmd_jump(args) {
     self endon("disconnect");
     level endon("intermission");
-    level endon("end_map"); if(self.sessionstate != "playing")
-        return; if(isDefined(self.cooldown)) { message_player("Cooldown, wait " + 
-        self.cooldown + " seconds."); return;
+    level endon("end_map");
+    if(self.sessionstate != "playing")
+        return;
+    if(isDefined(self.cooldown)) {
+        message_player("Cooldown, wait " + self.cooldown + " seconds.");
+        return;
     }
-    velocity = self getVelocity(); newVelocity_z = velocity[2] + 140; newVelocity = 
-    (velocity[0], velocity[1], newVelocity_z); self setVelocity(newVelocity); self.cooldown 
-    = 6; i = self.cooldown;
-	for(n=0; n<i; n++) { self.cooldown--; wait 1;
+    velocity = self getVelocity();
+    newVelocity_z = velocity[2] + 140;
+    newVelocity = (velocity[0], velocity[1], newVelocity_z);
+    self setVelocity(newVelocity);
+    self.cooldown = 6;
+    i = self.cooldown;
+	for(n=0; n<i; n++) {
+	    self.cooldown--;
+	    wait 1;
 	}
 	self.cooldown = undefined;
 }
 //Using Battleroyale physics
-cmd_dash(args) { self endon("disconnect"); level endon("intermission"); level 
-    endon("end_map"); if(self.sessionstate != "playing")
-        return; if(isDefined(self.cooldown)) { message_player("Cooldown, wait " + 
-        self.cooldown + " seconds."); return;
+cmd_dash(args) {
+    self endon("disconnect");
+    level endon("intermission");
+    level endon("end_map");
+    if(self.sessionstate != "playing")
+        return;
+    if(isDefined(self.cooldown)) {
+        message_player("Cooldown, wait " + self.cooldown + " seconds.");
+        return;
     }
-    if(self forwardButtonPressed()) { velocity = self getVelocity(); angles = self 
-		getPlayerAngles(); forwardDirection = anglesToForward(angles);
+    if(self forwardButtonPressed()) {
+        velocity = self getVelocity();
+        angles = self getPlayerAngles();
+        forwardDirection = anglesToForward(angles);
 		
-		newVelocity_x = velocity[0] + forwardDirection[0] * 600; newVelocity_y = 
-		velocity[1] + forwardDirection[1] * 600; newVelocity_z = velocity[2] + 
-		forwardDirection[2] * 600; newVelocity = (newVelocity_x, newVelocity_y, 
-		newVelocity_z); self setVelocity(newVelocity);
+		newVelocity_x = velocity[0] + forwardDirection[0] * 600;
+		newVelocity_y = velocity[1] + forwardDirection[1] * 600;
+		newVelocity_z = velocity[2] + forwardDirection[2] * 600;
+		newVelocity = (newVelocity_x, newVelocity_y, newVelocity_z);
+		self setVelocity(newVelocity);
 	}
-    self.cooldown = 10; i = self.cooldown; for(n=0; n<i; n++) { self.cooldown--; wait 1;
+    self.cooldown = 10;
+    i = self.cooldown;
+    for(n=0; n<i; n++) {
+        self.cooldown--;
+        wait 1;
 	}
 	self.cooldown = undefined;
 }
-cmd_stuka(args) { if(args.size != 2) { message_player("^1ERROR: ^7Invalid number of 
-        arguments."); return;
+cmd_stuka(args) {
+    if(args.size != 2) {
+        message_player("^1ERROR: ^7Invalid number of arguments.");
+        return;
     }
     args1 = args[1]; // num | string if(!isDefined(args1)) { message_player("^1ERROR: 
         ^7Invalid argument."); return;
