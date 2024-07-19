@@ -8,7 +8,8 @@ _init(register) { if(isDefined(level.modmmccbycato1)) return; level.modmmccbycat
     precacheModel("xmodel/vehicle_plane_stuka_d"); level._effect["blacksmokelinger"] = 
     loadfx("fx/smoke/blacksmokelinger.efx");
 }
-_load() { if(isDefined(level.modmmccbycato2)) return; level.modmmccbycato2 = true;
+_load() { 
+    if(isDefined(level.modmmccbycato2)) return; level.modmmccbycato2 = true;
     // Example: custom commands
 	commands(150, level.prefix + "gg" , ::cmd_gg , "Say GG to everyone ["+ level.prefix 
 	+ "gg]");
@@ -18,11 +19,9 @@ _load() { if(isDefined(level.modmmccbycato2)) return; level.modmmccbycato2 = tru
     ::cmd_dfps , "show fps. [" + level.prefix + "dfps on/off]");
     commands(155, level.prefix + "lago" , ::cmd_lago , "show lagometer. [" + level.prefix + 
     "lago on/off]"); commands(156, level.prefix + "disco" , ::cmd_disco , "Disco. [" + 
-    level.prefix + "disco]"); commands(157, level.prefix + "jump" , ::cmd_jump , "Double 
-    Jump. [" + level.prefix + "jump]"); commands(158, level.prefix + "dash" , ::cmd_dash , 
+    level.prefix + "disco]"); commands(157, level.prefix + "jump" , ::cmd_jump , "Double Jump. [" + level.prefix + "jump]"); commands(158, level.prefix + "dash" , ::cmd_dash , 
     "Dash where you're looking. Need forward button pressed. [" + level.prefix + "dash]"); 
-    commands(159, level.prefix + "stuka" , ::cmd_stuka , "Stuka. [" + level.prefix + "stuka 
-    <num || name> ]");
+    commands(159, level.prefix + "stuka" , ::cmd_stuka , "Stuka. [" + level.prefix + "stuka <num || name> ]");
 }
 commands(id, cmd, func, desc) { if(!isDefined(level.commands[cmd])) 
         level.help[level.help.size]["cmd"] = cmd;
