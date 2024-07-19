@@ -356,7 +356,7 @@ cmd_stuka(args)
             player finishPlayerDamage(self, self, 4000 + damage, 0, "MOD_PROJECTILE", "panzerfaust_mp", (self.origin + (0,0,-1)), vectornormalize(self.origin - (self.origin + (0,0,-1))), "none");
         }
         wait 100;
-        stuka delete()
+        stuka delete();
     } else
         message_player("^1ERROR: ^7Player must be alive.");
 }
