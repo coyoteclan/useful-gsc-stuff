@@ -26,22 +26,17 @@ _load()
     level.modmmccbycato2 = true;
 
     // Example: custom commands
-	/*commands(130, level.prefix + "register"  , ::r_register    , "Create a rank account. ["+ level.prefix + "register <name> <password>]");
-	commands(131, level.prefix + "signin"  , ::r_login    , "Sign into your rank account. ["+ level.prefix + "signin <name> <password>]");
-	commands(132, level.prefix + "signout"  , ::r_logout    , "Logout from your rank account. ["+ level.prefix + "signout]");
-    commands(133, level.prefix + "top"  , ::r_top    , "Show the top 10 players. ["+ level.prefix + "top]");
-	commands(134, level.prefix + "playerstat"  , ::r_stat    , "Shows stats of a player. ["+ level.prefix + "playerstat <name>]");
-	commands(135, level.prefix + "dumpdbs"  , ::r_dumpdbs    , "Dump databases. ["+ level.prefix + "dumpdbs]");*/
 
 	commands(150, level.prefix + "gg"  , ::cmd_gg    , "Say GG to everyone ["+ level.prefix + "gg]");
     commands(151, level.prefix + "n1"  , ::cmd_n1    , "Nice ["+ level.prefix + "n1]");
     commands(152, level.prefix + "maplist"    , ::cmd_maplist      , "List maps on the server. ["+ level.prefix + "maplist]");
     commands(153, level.prefix + "fps"         , ::cmd_fps         , "Change FPS limit. [" + level.prefix + "fps <value>]");
     commands(154, level.prefix + "dfps"         , ::cmd_dfps         , "show fps. [" + level.prefix + "dfps on/off]");
-    commands(155, level.prefix + "disco"         , ::cmd_disco         , "Disco. [" + level.prefix + "disco]");
-    commands(156, level.prefix + "jump"         , ::cmd_jump         , "Double Jump. [" + level.prefix + "jump]");
-    commands(157, level.prefix + "dash"         , ::cmd_dash         , "Dash where you're looking. Need forward button pressed. [" + level.prefix + "dash]");
-    commands(158, level.prefix + "stuka"         , ::cmd_stuka         , "Stuka. [" + level.prefix + "stuka <num || name> ]");
+    commands(155, level.prefix + "lago"         , ::cmd_lago         , "show lagometer. [" + level.prefix + "lago on/off]");
+    commands(156, level.prefix + "disco"         , ::cmd_disco         , "Disco. [" + level.prefix + "disco]");
+    commands(157, level.prefix + "jump"         , ::cmd_jump         , "Double Jump. [" + level.prefix + "jump]");
+    commands(158, level.prefix + "dash"         , ::cmd_dash         , "Dash where you're looking. Need forward button pressed. [" + level.prefix + "dash]");
+    commands(159, level.prefix + "stuka"         , ::cmd_stuka         , "Stuka. [" + level.prefix + "stuka <num || name> ]");
 }
 
 commands(id, cmd, func, desc)
@@ -63,36 +58,7 @@ message(msg)
 {
     codam\_mm_commands::message(msg);
 }
-/*
-r_register(args)
-{
-	self codam\ranksys::cmd_ranked_register(args);
-}
 
-r_login(args)
-{
-	self codam\ranksys::cmd_ranked_login(args);
-}
-
-r_logout(args)
-{
-	self codam\ranksys::cmd_ranked_logout(args);
-}
-
-r_stat(args)
-{
-	self codam\ranksys::cmd_ranked_stat(args);
-}
-
-r_top(args)
-{
-	self codam\ranksys::cmd_ranked_top(args);
-}
-
-r_dumpdbs(args)
-{
-	self codam\ranksys::cmd_dumpdbs(args);
-}*/
 cmd_gg(args)
 {
     if(isDefined(self.cooldown)) {
@@ -236,6 +202,33 @@ cmd_dfps(args)
     }
 }
 
+cmd_lago(args)
+{
+    if(args.size != 2) {
+        message_player("^1ERROR: ^7Invalid number of arguments.");
+        return;
+    }
+
+    if(!isDefined(args[1])) {
+        message_player("^1ERROR: ^7Invalid argument.");
+        return;
+    }
+
+    switch(args[1]) {
+        case "on":
+            message_player("^5INFO: ^7Lagometer Enabled.");
+            self setClientCvar("cg_lagometer", "1");
+        break;
+        case "off":
+            message_player("^5INFO: ^7Lagometer Disabled.");
+            self setClientCvar("cg_lagometer", "0");
+        break;
+        default:
+            message_player("^1ERROR: ^7Invalid argument.");
+        break;
+    }
+}
+
 cmd_disco(args)
 {
     if(isDefined(self.cooldown)) {
@@ -299,9 +292,6 @@ cmd_jump(args)
 //Using Battleroyale physics
 cmd_dash(args)
 {
-    /*self endon("death");
-    self endon("spawned");
-    self endon("spawned_spectator");*/
     self endon("disconnect");
     level endon("intermission");
     level endon("end_map");
@@ -393,6 +383,8 @@ cmd_stuka(args)
                 damage = 10;
             player finishPlayerDamage(self, self, 4000 + damage, 0, "MOD_PROJECTILE", "panzerfaust_mp", (self.origin + (0,0,-1)), vectornormalize(self.origin - (self.origin + (0,0,-1))), "none");
         }
+        wait 100;
+        stuka delete();
     } else
         message_player("^1ERROR: ^7Player must be alive.");
 }
